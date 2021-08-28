@@ -9,22 +9,43 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Paper from "@material-ui/core/Paper";
 import Container from "@material-ui/core/Container";
 import HocDbsLogo from "../hoc-dbs-logo/hoc-dbs-logo";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    fab: {
+      position: "absolute",
+      bottom: theme.spacing(2),
+      right: theme.spacing(2),
+    },
+  })
+);
 
 const App = () => {
+  const styles = useStyles();
   const [active, updateDrawer] = React.useState<boolean>(false);
+
   return (
-    <Container style={{ border: "thin solid red" }}>
+    <Container>
       <AppBar position="fixed">
-        <AppToolbar onOpen={() => updateDrawer(true)} />
+        <AppToolbar
+          brandLabel="Dachboden Logo Editor"
+          onOpen={() => updateDrawer(true)}
+        />
         <AppDrawer open={active} onClose={() => updateDrawer(false)} />
       </AppBar>
       <Toolbar />
 
       <Paper elevation={3}>
-        <HocDbsLogo />
+        <HocDbsLogo randomPlay={false} />
       </Paper>
 
-      <Fab color="secondary" arial-label="Edit">
+      <Fab
+        color="secondary"
+        arial-label="Edit"
+        onClick={() => updateDrawer(true)}
+        className={styles.fab}
+      >
         <SvgIcon>
           <EditIcon />
         </SvgIcon>

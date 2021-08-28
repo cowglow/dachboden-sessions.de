@@ -1,20 +1,15 @@
 import React from "react";
 import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import SvgIcon from "@material-ui/core/SvgIcon";
+import Typography from "@material-ui/core/Typography";
 
 interface AppToolbarProps {
+  brandLabel: string;
   onOpen: MenuToggleAction;
 }
 
-const AppToolbar: React.FC<AppToolbarProps> = ({ onOpen }) => (
+const AppToolbar: React.FC<AppToolbarProps> = ({ brandLabel, onOpen }) => (
   <Toolbar>
-    <IconButton edge="start" color="inherit" aria-label="menu" onClick={onOpen}>
-      <SvgIcon>
-        <path d="M0 0h24v24H0z" fill="none" />
-        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
-      </SvgIcon>
-    </IconButton>
+    <Typography variant="h6">{brandLabel}</Typography>
   </Toolbar>
 );
 
