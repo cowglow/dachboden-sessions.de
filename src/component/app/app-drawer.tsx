@@ -3,6 +3,9 @@ import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ColorPicker from "material-ui-color-picker";
+import { useColorState } from "../../context/color-state-context";
 
 interface AppDrawerProps {
   open: boolean;
@@ -10,23 +13,59 @@ interface AppDrawerProps {
 }
 
 const AppDrawer: React.FC<AppDrawerProps> = (props) => {
+  const { left, right, border, background, setColor } = useColorState();
+
   return (
     <Drawer anchor="left" {...props}>
-      <div
-        role="presentation"
-        onClick={props.onClose}
-        onKeyDown={props.onClose}
-        style={{ width: 250 }}
-      >
+      <div role="presentation" style={{ padding: 15 }}>
         <List>
-          <ListItem button>
-            <ListItemText primary={"Menu Item 1"} />
+          <ListItem>
+            <ListItemIcon>Dach</ListItemIcon>
+            <ListItemText
+              primary={
+                <ColorPicker
+                  name="left"
+                  defaultValue={left}
+                  onChange={(color) => setColor("left", color)}
+                />
+              }
+            />
           </ListItem>
-          <ListItem button>
-            <ListItemText primary={"Menu Item 2"} />
+          <ListItem>
+            <ListItemIcon>Boden</ListItemIcon>
+            <ListItemText
+              primary={
+                <ColorPicker
+                  name="right"
+                  defaultValue={right}
+                  onChange={(color) => setColor("right", color)}
+                />
+              }
+            />
           </ListItem>
-          <ListItem button>
-            <ListItemText primary={"Menu Item 3"} />
+          <ListItem>
+            <ListItemIcon>Border</ListItemIcon>
+            <ListItemText
+              primary={
+                <ColorPicker
+                  name="border"
+                  defaultValue={border}
+                  onChange={(color) => setColor("border", color)}
+                />
+              }
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemIcon>BackGr</ListItemIcon>
+            <ListItemText
+              primary={
+                <ColorPicker
+                  name="background"
+                  defaultValue={background}
+                  onChange={(color) => setColor("background", color)}
+                />
+              }
+            />
           </ListItem>
         </List>
       </div>
