@@ -1,4 +1,3 @@
 // .storybook/preview.js
 
-export const parameters = {
-};
+export const parameters = {};
