@@ -1,1 +1,1 @@
-![alt text](https://github.com/cowglow/db-logo/raw/master/src/assets/db-logo.svg "Logo Title Text 1")
+![alt text](https://github.com/cowglow/db-logo/raw/main/src/assets/db-logo.svg "Logo Title Text 1")
