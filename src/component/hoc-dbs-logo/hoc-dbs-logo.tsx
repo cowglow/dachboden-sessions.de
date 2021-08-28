@@ -6,6 +6,7 @@ import { useColorState } from "../../context/color-state-context";
 interface HocDbsLogoProps {
   randomPlay: boolean;
 }
+
 export const randomColors = {
   colorLeft: colors[Math.floor(Math.random() * colors.length)],
   colorRight: colors[Math.floor(Math.random() * colors.length)],
@@ -16,7 +17,7 @@ export const randomColors = {
 const HocDbsLogo: React.FC<HocDbsLogoProps> = ({ randomPlay = true }) => {
   const { left, right, background, border } = useColorState();
 
-  const [props, setProps] = React.useState<DbsLogoProps>({
+  const [colorProps, setColorProps] = React.useState<DbsLogoProps>({
     colorLeft: left,
     colorRight: right,
     colorBackground: background,
@@ -26,7 +27,7 @@ const HocDbsLogo: React.FC<HocDbsLogoProps> = ({ randomPlay = true }) => {
   React.useEffect(() => {
     const interval = setInterval(
       () => {
-        setProps({
+        setColorProps({
           colorLeft: colors[Math.floor(Math.random() * colors.length)],
           colorRight: colors[Math.floor(Math.random() * colors.length)],
           colorBackground: colors[Math.floor(Math.random() * colors.length)],
@@ -43,10 +44,10 @@ const HocDbsLogo: React.FC<HocDbsLogoProps> = ({ randomPlay = true }) => {
 
   return (
     <DbsLogo
-      colorLeft={props.colorLeft}
-      colorRight={props.colorRight}
-      colorBackground={props.colorBackground}
-      colorBorder={props.colorBorder}
+      colorLeft={left}
+      colorRight={right}
+      colorBackground={background}
+      colorBorder={border}
     />
   );
 };
