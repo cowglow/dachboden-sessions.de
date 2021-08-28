@@ -33,10 +33,10 @@ export const ColorStateProvider: React.FC<ColorStateProviderProps> = ({
   children,
   defaultValue = defaultValues,
 }) => {
-  const [background, setBackground] = React.useState(defaultValues.background);
-  const [border, setBorder] = React.useState(defaultValues.border);
-  const [left, setLeft] = React.useState(defaultValues.left);
-  const [right, setRight] = React.useState(defaultValues.right);
+  const [background, setBackground] = React.useState(defaultValue.background);
+  const [border, setBorder] = React.useState(defaultValue.border);
+  const [left, setLeft] = React.useState(defaultValue.left);
+  const [right, setRight] = React.useState(defaultValue.right);
 
   const setColor = (color: string, value: string) => {
     switch (color) {
