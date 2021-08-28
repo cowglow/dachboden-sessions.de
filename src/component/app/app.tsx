@@ -13,6 +13,10 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    wrapper: {
+      width: "100%",
+      height: "100%",
+    },
     fab: {
       position: "absolute",
       bottom: theme.spacing(2),
@@ -38,7 +42,9 @@ const App = () => {
       <br />
 
       <Paper elevation={3}>
-        <HocDbsLogo randomPlay={false} />
+        <div className={styles.wrapper}>
+          <HocDbsLogo randomPlay={false} />
+        </div>
       </Paper>
 
       <Fab

@@ -17,7 +17,7 @@ export const randomColors = {
 const HocDbsLogo: React.FC<HocDbsLogoProps> = ({ randomPlay = true }) => {
   const { left, right, background, border } = useColorState();
 
-  const [colorProps, setColorProps] = React.useState<DbsLogoProps>({
+  const [, setColorProps] = React.useState<DbsLogoProps>({
     colorLeft: left,
     colorRight: right,
     colorBackground: background,
@@ -40,7 +40,7 @@ const HocDbsLogo: React.FC<HocDbsLogoProps> = ({ randomPlay = true }) => {
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [randomPlay]);
 
   return (
     <DbsLogo
