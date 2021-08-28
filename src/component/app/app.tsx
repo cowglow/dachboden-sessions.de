@@ -35,6 +35,7 @@ const App = () => {
         <AppDrawer open={active} onClose={() => updateDrawer(false)} />
       </AppBar>
       <Toolbar />
+      <br />
 
       <Paper elevation={3}>
         <HocDbsLogo randomPlay={false} />
