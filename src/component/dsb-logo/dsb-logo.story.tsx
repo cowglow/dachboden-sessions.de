@@ -1,10 +1,10 @@
 import React from "react";
 import { Meta, Story } from "@storybook/react";
 import DbsLogo, { DbsLogoProps } from "./dsb-logo";
-import { defaultColors } from "../hoc-dbs-logo/hoc-dbs-logo";
+import { randomColors as defaultColors } from "../hoc-dbs-logo/hoc-dbs-logo";
 
 export default {
-  title: "components",
+  title: "components/dbs-logo",
   component: DbsLogo,
   argTypes: {
     colorLeft: { name: "Left Color", control: "color" },
