@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  legacy:
+    image: dachboden-session.de:legacy
+    build:
+      context: services/legacy
+    volumes:
+      - ./services/legacy/package.json:/app/package.json
+      - ./services/legacy/src:/app/src
+      - yarn-cache:/usr/local/share/.cache/yarn
+    ports:
+      - '3000:3000'
+
+volumes:
+  yarn-cache:
