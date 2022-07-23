@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.js": "/dachboden-sessions.de/static/js/main.02f6274a.chunk.js",
-    "main.js.map": "/dachboden-sessions.de/static/js/main.02f6274a.chunk.js.map",
-    "runtime-main.js": "/dachboden-sessions.de/static/js/runtime-main.f297b9a6.js",
-    "runtime-main.js.map": "/dachboden-sessions.de/static/js/runtime-main.f297b9a6.js.map",
-    "static/js/2.291612bd.chunk.js": "/dachboden-sessions.de/static/js/2.291612bd.chunk.js",
-    "static/js/2.291612bd.chunk.js.map": "/dachboden-sessions.de/static/js/2.291612bd.chunk.js.map",
-    "index.html": "/dachboden-sessions.de/index.html",
-    "static/js/2.291612bd.chunk.js.LICENSE.txt": "/dachboden-sessions.de/static/js/2.291612bd.chunk.js.LICENSE.txt",
-    "static/media/create-24px.249fb4c7.svg": "/dachboden-sessions.de/static/media/create-24px.249fb4c7.svg"
+    "main.js": "/static/js/main.5cbb481d.chunk.js",
+    "main.js.map": "/static/js/main.5cbb481d.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.a8c33485.js",
+    "runtime-main.js.map": "/static/js/runtime-main.a8c33485.js.map",
+    "static/js/2.291612bd.chunk.js": "/static/js/2.291612bd.chunk.js",
+    "static/js/2.291612bd.chunk.js.map": "/static/js/2.291612bd.chunk.js.map",
+    "index.html": "/index.html",
+    "static/js/2.291612bd.chunk.js.LICENSE.txt": "/static/js/2.291612bd.chunk.js.LICENSE.txt",
+    "static/media/create-24px.249fb4c7.svg": "/static/media/create-24px.249fb4c7.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.f297b9a6.js",
+    "static/js/runtime-main.a8c33485.js",
     "static/js/2.291612bd.chunk.js",
-    "static/js/main.02f6274a.chunk.js"
+    "static/js/main.5cbb481d.chunk.js"
   ]
 }
