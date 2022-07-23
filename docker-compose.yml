@@ -12,5 +12,16 @@ services:
     ports:
       - '3000:3000'
 
+  svelte-kit:
+    image: dachboden-session.de:dev
+    build:
+      context: services/svelte-kit
+    volumes:
+      - ./services/svelte-kit/package.json:/app/package.json
+      - ./services/svelte-kit/src:/app/src
+      - yarn-cache:/usr/local/share/.cache/yarn
+    ports:
+      - '4000:4000'
+
 volumes:
   yarn-cache:
