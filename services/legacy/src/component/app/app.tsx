@@ -1,7 +1,7 @@
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Fab from "@material-ui/core/Fab";
-import { ReactComponent as EditIcon } from "../../assets/create-24px.svg";
+import { ReactComponent as EditIcon } from "../../assets/EditIcon.svg";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import AppToolbar from "./app-toolbar";
 import AppDrawer from "./app-drawer";
