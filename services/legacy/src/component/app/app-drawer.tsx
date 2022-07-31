@@ -1,8 +1,10 @@
 import React from "react";
 import Drawer from "@material-ui/core/Drawer";
+import Button from "@material-ui/core/Button";
 import ColorPicker from "material-ui-color-picker";
 import { useColorState } from "../../context/color-state-context";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { download } from "../../service/download";
 
 interface AppDrawerProps {
   open: boolean;
@@ -12,24 +14,18 @@ interface AppDrawerProps {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     paper: {
-      width: 250,
-      height: 500,
-      padding: theme.spacing(2),
-      backgroundColor: theme.palette.grey[300],
-      color: theme.palette.text.primary,
+      width: "50%",
+      height: "50%",
+      margin: "0 auto",
       position: "relative",
-      margin: "50% auto",
+      top: "25%",
     },
     wrapper: {
+      padding: theme.spacing(2),
       display: "flex",
+      flex: 1,
       flexDirection: "column",
-      justifyContent: "space-between",
-      height: "100%",
-    },
-    label: {
-      flexGrow: 1,
-      display: "flex",
-      alignItems: "flex-end",
+      justifyContent: "space-around",
     },
   })
 );
@@ -61,7 +57,28 @@ const AppDrawer: React.FC<AppDrawerProps> = (props) => {
           value={background}
           onChange={(color) => setColor("background", color)}
         />
-        <div className={styles.label}>DS Logo Editor v.0.1</div>
+        <div>
+          <Button
+            onClick={() =>
+              download({
+                left,
+                right,
+                border,
+                background,
+              })
+            }
+            variant="contained"
+            color="primary"
+            fullWidth={true}
+          >
+            Download SVG
+          </Button>
+          <br />
+          <br />
+          <Button variant="contained" color="primary" fullWidth={true}>
+            Download PNG
+          </Button>
+        </div>
       </div>
     </Drawer>
   );
