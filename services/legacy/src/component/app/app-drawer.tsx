@@ -1,10 +1,13 @@
 import React from "react";
 import Drawer from "@material-ui/core/Drawer";
 import Button from "@material-ui/core/Button";
+import { ReactComponent as ColorPickerIcon } from "../../assets/ColorPicker.svg";
+
 import ColorPicker from "material-ui-color-picker";
 import { useColorState } from "../../context/color-state-context";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { download } from "../../service/download";
+import { InputAdornment } from "@material-ui/core";
 
 interface AppDrawerProps {
   open: boolean;
@@ -38,42 +41,83 @@ const AppDrawer: React.FC<AppDrawerProps> = (props) => {
     <Drawer anchor="bottom" {...props} classes={{ paper: styles.paper }}>
       <div className={styles.wrapper}>
         <ColorPicker
+          id="dColor"
+          variant="outlined"
+          aria-label="Letter D color"
+          style={{ backgroundColor: left }}
           defaultValue="Dach"
           value={left}
           onChange={(color) => setColor("left", color)}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <ColorPickerIcon />
+              </InputAdornment>
+            ),
+          }}
         />
+
         <ColorPicker
+          variant="outlined"
+          aria-label="Letter B color"
+          style={{ backgroundColor: right }}
           defaultValue="Boden"
           value={right}
           onChange={(color) => setColor("right", color)}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <ColorPickerIcon />
+              </InputAdornment>
+            ),
+          }}
         />
         <ColorPicker
+          variant="outlined"
+          aria-label="border color"
+          style={{ backgroundColor: border }}
           defaultValue="Border"
           value={border}
           onChange={(color) => setColor("border", color)}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <ColorPickerIcon />
+              </InputAdornment>
+            ),
+          }}
         />
         <ColorPicker
+          variant="outlined"
+          aria-label="background color"
+          style={{ backgroundColor: background }}
           defaultValue="Background"
           value={background}
           onChange={(color) => setColor("background", color)}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <ColorPickerIcon />
+              </InputAdornment>
+            ),
+          }}
         />
-        <div>
-          <Button
-            onClick={() =>
-              download({
-                left,
-                right,
-                border,
-                background,
-              })
-            }
-            variant="contained"
-            color="primary"
-            fullWidth={true}
-          >
-            Download SVG
-          </Button>
-        </div>
+
+        <Button
+          onClick={() =>
+            download({
+              left,
+              right,
+              border,
+              background,
+            })
+          }
+          variant="contained"
+          color="primary"
+          fullWidth={true}
+        >
+          Download SVG
+        </Button>
       </div>
     </Drawer>
   );
