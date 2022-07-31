@@ -1,18 +1,19 @@
 {
   "files": {
-    "main.js": "/static/js/main.dc5c23d6.chunk.js",
-    "main.js.map": "/static/js/main.dc5c23d6.chunk.js.map",
+    "main.js": "/static/js/main.d4f29a03.chunk.js",
+    "main.js.map": "/static/js/main.d4f29a03.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.a8c33485.js",
     "runtime-main.js.map": "/static/js/runtime-main.a8c33485.js.map",
-    "static/js/2.af5a7b22.chunk.js": "/static/js/2.af5a7b22.chunk.js",
-    "static/js/2.af5a7b22.chunk.js.map": "/static/js/2.af5a7b22.chunk.js.map",
+    "static/js/2.82161375.chunk.js": "/static/js/2.82161375.chunk.js",
+    "static/js/2.82161375.chunk.js.map": "/static/js/2.82161375.chunk.js.map",
     "index.html": "/index.html",
-    "static/js/2.af5a7b22.chunk.js.LICENSE.txt": "/static/js/2.af5a7b22.chunk.js.LICENSE.txt",
-    "static/media/create-24px.249fb4c7.svg": "/static/media/create-24px.249fb4c7.svg"
+    "static/js/2.82161375.chunk.js.LICENSE.txt": "/static/js/2.82161375.chunk.js.LICENSE.txt",
+    "static/media/ColorPicker.6b01793a.svg": "/static/media/ColorPicker.6b01793a.svg",
+    "static/media/EditIcon.249fb4c7.svg": "/static/media/EditIcon.249fb4c7.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.a8c33485.js",
-    "static/js/2.af5a7b22.chunk.js",
-    "static/js/main.dc5c23d6.chunk.js"
+    "static/js/2.82161375.chunk.js",
+    "static/js/main.d4f29a03.chunk.js"
   ]
 }
