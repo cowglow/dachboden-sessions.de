@@ -1,10 +1,12 @@
 <script lang="ts">
+import Navigation from "../lib/components/Navigation.svelte";
+
 let colorLeft = "#0F0";
 let colorRight = "#ff0";
 let colorBorder = "#fff";
 let colorBackground = "#000";
 </script>
-
+<Navigation />
 <div>
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
     <g id="background">

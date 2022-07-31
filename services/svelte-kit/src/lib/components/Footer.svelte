@@ -1,5 +1,5 @@
 <div>
-  <slot/>
+  &copy; {new Date().getFullYear()}
 </div>
 
 <style>

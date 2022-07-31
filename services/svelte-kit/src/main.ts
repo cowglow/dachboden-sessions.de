@@ -5,7 +5,8 @@ import LogoEditor from "./routes/LogoEditor.svelte";
 import Members from "./routes/Members.svelte";
 import Mixes from "./routes/Mixes.svelte";
 import StartPage from "./routes/StartPage.svelte";
-import Layout from "./routes/__layout.svelte";
+import HeaderComponent from "./lib/components/Header.svelte";
+import FooterComponent from "./lib/components/Footer.svelte";
 
 const currentRoute = createRouter({
   routes: [
@@ -17,9 +18,19 @@ const currentRoute = createRouter({
   ],
 });
 
-console.log(currentRoute);
+const headerTarget = document.getElementById("header");
+const appTarget = document.getElementById("app");
+const footerTarget = document.getElementById("footer");
 
-// const content = new currentRoute();
+const header = new HeaderComponent({
+  target: headerTarget,
+});
 
-new Layout({ target: document.getElementById("app") })
-// const layout = new console.log(content);
+const app = new currentRoute({
+  target: appTarget,
+});
+
+const footer = new FooterComponent({
+  target: footerTarget,
+});
+export { header, app, footer };

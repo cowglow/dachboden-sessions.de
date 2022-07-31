@@ -5,7 +5,7 @@ import Navigation from "./Navigation.svelte";
 <header>
   <div>
     <img src="/branding.png" alt="dachboden session logo" />
-    <slot />
+    Dachboden Sessions (est. 2016)
   </div>
   <div><Navigation /></div>
 </header>
