@@ -73,11 +73,6 @@ const AppDrawer: React.FC<AppDrawerProps> = (props) => {
           >
             Download SVG
           </Button>
-          <br />
-          <br />
-          <Button variant="contained" color="primary" fullWidth={true}>
-            Download PNG
-          </Button>
         </div>
       </div>
     </Drawer>
