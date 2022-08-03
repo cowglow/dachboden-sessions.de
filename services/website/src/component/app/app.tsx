@@ -1,32 +1,19 @@
 import React from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Fab from "@material-ui/core/Fab";
+// @ts-ignore
 import { ReactComponent as EditIcon } from "../../assets/EditIcon.svg";
-import SvgIcon from "@material-ui/core/SvgIcon";
-import AppToolbar from "./app-toolbar";
-import AppDrawer from "./app-drawer";
-import Toolbar from "@material-ui/core/Toolbar";
-import Paper from "@material-ui/core/Paper";
-import Container from "@material-ui/core/Container";
+import AppToolbar from "../app-toolbar/app-toolbar";
+import AppDrawer from "../app-drawer/app-drawer";
 import HocDbsLogo from "../hoc-dbs-logo/hoc-dbs-logo";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    wrapper: {
-      width: "100%",
-      height: "100%",
-    },
-    fab: {
-      position: "absolute",
-      bottom: theme.spacing(2),
-      right: theme.spacing(2),
-    },
-  })
-);
+import AppBar from "@mui/material/AppBar";
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
+import SvgIcon from "@mui/material/SvgIcon";
+import Toolbar from "@mui/material/Toolbar";
+
+import { Wrapper, StyledFab } from "./app.styled";
 
 const App = () => {
-  const styles = useStyles();
   const [active, updateDrawer] = React.useState<boolean>(false);
 
   return (
@@ -42,21 +29,20 @@ const App = () => {
       <br />
 
       <Paper elevation={3}>
-        <div className={styles.wrapper}>
+        <Wrapper>
           <HocDbsLogo randomPlay={false} />
-        </div>
+        </Wrapper>
       </Paper>
 
-      <Fab
+      <StyledFab
         color="secondary"
         arial-label="Edit"
         onClick={() => updateDrawer(true)}
-        className={styles.fab}
       >
         <SvgIcon>
           <EditIcon />
         </SvgIcon>
-      </Fab>
+      </StyledFab>
     </Container>
   );
 };

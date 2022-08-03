@@ -1,16 +1,16 @@
 version: "3.8"
 
 services:
-  legacy:
-    image: dachboden-session.de:legacy
+  website:
+    image: dachboden-session.de:website
     build:
-      context: services/legacy
+      context: services/website
     volumes:
-      - ./services/legacy/package.json:/app/package.json
-      - ./services/legacy/src:/app/src
+      - ./services/website/package.json:/app/package.json
+      - ./services/website/src:/app/src
       - yarn-cache:/usr/local/share/.cache/yarn
     ports:
-      - '3000:3000'
+      - "3000:3000"
 
   svelte-kit:
     image: dachboden-session.de:dev
@@ -21,7 +21,7 @@ services:
       - ./services/svelte-kit/src:/app/src
       - yarn-cache:/usr/local/share/.cache/yarn
     ports:
-      - '4000:4000'
+      - "4000:4000"
 
 volumes:
   yarn-cache:

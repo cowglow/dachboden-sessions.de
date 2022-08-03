@@ -1,6 +1,6 @@
 import React from "react";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
+import Typography from "@mui/material/Typography";
+import { StyledToolbar } from "./app-toolbar.styled";
 
 interface AppToolbarProps {
   brandLabel: string;
@@ -8,9 +8,9 @@ interface AppToolbarProps {
 }
 
 const AppToolbar: React.FC<AppToolbarProps> = ({ brandLabel, onOpen }) => (
-  <Toolbar>
+  <StyledToolbar>
     <Typography variant="h6">{brandLabel}</Typography>
-  </Toolbar>
+  </StyledToolbar>
 );
 
 export default AppToolbar;
