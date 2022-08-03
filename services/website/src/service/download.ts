@@ -8,7 +8,8 @@ type PrintPalette = {
   border: string;
   background: string;
 };
-export const download = (palette: PrintPalette) => {
+
+const createSvgElement = (palette: PrintPalette) => {
   const svgElement = createElement(
     DsbLogo,
     {
@@ -22,14 +23,49 @@ export const download = (palette: PrintPalette) => {
 
   const svgMarkup = renderToStaticMarkup(svgElement);
   const preface = '<?xml version="1.0" standalone="no"?>\r\n';
-  const svgBlob = new Blob([preface, svgMarkup], {
+  return new Blob([preface, svgMarkup], {
     type: "image/svg+xml;charset=utf-8",
   });
-  const svgUrl = URL.createObjectURL(svgBlob);
+};
+
+const width = 1080;
+const height = 1080;
+
+const getFileName = (ext: string) => {
+  return `db-logo-${Date.now()}.${ext}`;
+};
+
+const downloadFile = (href: string, ext: string) => {
   let downloadLink = document.createElement("a");
-  downloadLink.href = svgUrl;
-  downloadLink.download = `db-logo=${Date.now()}.svg`;
+  downloadLink.href = href;
+  downloadLink.download = getFileName(ext);
   document.body.appendChild(downloadLink);
   downloadLink.click();
   document.body.removeChild(downloadLink);
+};
+
+export const downloadPng = (palette: PrintPalette) => {
+  const svgElement = createSvgElement(palette);
+  const svgUrl = URL.createObjectURL(svgElement);
+  let image = new Image();
+  image.onload = () => {
+    let canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+
+    let context = canvas.getContext("2d");
+    if (context) {
+      context.drawImage(image, 0, 0, width, height);
+    }
+
+    downloadFile(canvas.toDataURL(), "png");
+  };
+
+  image.src = svgUrl;
+};
+
+export const downloadSvg = (palette: PrintPalette) => {
+  const svgElement = createSvgElement(palette);
+  const svgUrl = URL.createObjectURL(svgElement);
+  downloadFile(svgUrl, "svg");
 };

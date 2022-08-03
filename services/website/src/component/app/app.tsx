@@ -1,5 +1,4 @@
 import React from "react";
-// @ts-ignore
 import { ReactComponent as EditIcon } from "../../assets/EditIcon.svg";
 import AppToolbar from "../app-toolbar/app-toolbar";
 import AppDrawer from "../app-drawer/app-drawer";

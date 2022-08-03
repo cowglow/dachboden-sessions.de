@@ -1,10 +1,11 @@
 import React from "react";
 import { useColorState } from "../../context/color-state-context";
-import { download } from "../../service/download";
+import { downloadPng, downloadSvg } from "../../service/download";
 import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
 import Grid from "@mui/material/Grid";
 import { StyledInputElement, Wrapper } from "./app-drawer.styled";
+import { ButtonGroup } from "@mui/material";
 
 interface AppDrawerProps {
   open: boolean;
@@ -15,6 +16,12 @@ type ColorPickerChangeEvent = { target: { value: string } };
 
 const AppDrawer: React.FC<AppDrawerProps> = (props) => {
   const { left, right, border, background, setColor } = useColorState();
+  let palette = {
+    left,
+    right,
+    border,
+    background,
+  };
 
   return (
     <Drawer anchor="bottom" {...props}>
@@ -74,21 +81,22 @@ const AppDrawer: React.FC<AppDrawerProps> = (props) => {
         </Grid>
       </Wrapper>
       <Wrapper>
-        <Button
-          onClick={() =>
-            download({
-              left,
-              right,
-              border,
-              background,
-            })
-          }
-          variant="contained"
-          color="primary"
-          fullWidth={true}
-        >
-          Download SVG
-        </Button>
+        <ButtonGroup>
+          <Button
+            onClick={() => downloadSvg(palette)}
+            variant="contained"
+            color="primary"
+          >
+            Download SVG
+          </Button>
+          <Button
+            onClick={() => downloadPng(palette)}
+            variant="contained"
+            color="primary"
+          >
+            Download PNG
+          </Button>
+        </ButtonGroup>
       </Wrapper>
     </Drawer>
   );
