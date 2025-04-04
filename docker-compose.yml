@@ -2,15 +2,13 @@ version: "3.8"
 
 services:
   website:
-    image: dachboden-session.de:website
+    container_name: dachboden-session-website
+    working_dir: /app
     build:
       context: services/website
-    volumes:
-      - ./services/website/package.json:/app/package.json
-      - ./services/website/src:/app/src
-      - yarn-cache:/usr/local/share/.cache/yarn
     ports:
       - "3000:3000"
-
-volumes:
-  yarn-cache:
+    volumes:
+      - ./services/website:/app
+    stdin_open: true
+    tty: true
