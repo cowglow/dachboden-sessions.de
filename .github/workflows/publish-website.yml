@@ -1,0 +1,49 @@
+name: Update Website
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Deploy Update
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build Docker image
+        run: docker build -t dachboden-session-website:latest ./services/website
+
+      - name: Run Docker container
+        run: docker run -d -p 3000:3000 dachboden-session-website:latest
+
+      - name: Wait for the container to be ready
+        run: sleep 30
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./services/website/dist
+
+      - name: Deploy 🚀
+        id: deployment
+        uses: actions/deploy-pages@v4
