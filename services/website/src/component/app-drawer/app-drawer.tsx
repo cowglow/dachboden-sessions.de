@@ -1,11 +1,10 @@
 import React from "react";
-import { useColorState } from "../../context/color-state-context";
-import { downloadPng, downloadSvg } from "../../service/download";
+import {useColorState} from "src/context/color-state-context";
+import {downloadPng, downloadSvg} from "src/service/download";
 import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
-import Grid from "@mui/material/Grid";
-import { StyledInputElement, Wrapper } from "./app-drawer.styled";
-import { ButtonGroup } from "@mui/material";
+import {StyledInputElement, Wrapper} from "./app-drawer.styled";
+import {Box, ButtonGroup} from "@mui/material";
 
 interface AppDrawerProps {
   open: boolean;
@@ -26,11 +25,11 @@ const AppDrawer: React.FC<AppDrawerProps> = (props) => {
   return (
     <Drawer anchor="bottom" {...props}>
       <Wrapper>
-        <Grid container spacing={1} justifyContent="center">
-          <Grid item xs={6} sm={4} md={3}>
+        <Box  justifyContent="center">
+          <Box >
             Letter D Color:
-          </Grid>
-          <Grid item xs={6} sm={8} md={9}>
+          </Box>
+          <Box>
             <StyledInputElement
               type="color"
               value={left}
@@ -38,12 +37,12 @@ const AppDrawer: React.FC<AppDrawerProps> = (props) => {
                 setColor("left", target.value)
               }
             />
-          </Grid>
+          </Box>
 
-          <Grid item xs={6} sm={4} md={3}>
+          <Box >
             Letter B Color:
-          </Grid>
-          <Grid item xs={6} sm={8} md={9}>
+          </Box>
+          <Box >
             <StyledInputElement
               type="color"
               value={right}
@@ -51,12 +50,12 @@ const AppDrawer: React.FC<AppDrawerProps> = (props) => {
                 setColor("right", target.value)
               }
             />
-          </Grid>
+          </Box>
 
-          <Grid item xs={6} sm={4} md={3}>
+          <Box >
             Border Color:
-          </Grid>
-          <Grid item xs={6} sm={8} md={9}>
+          </Box>
+          <Box >
             <StyledInputElement
               type="color"
               value={border}
@@ -64,12 +63,12 @@ const AppDrawer: React.FC<AppDrawerProps> = (props) => {
                 setColor("border", target.value)
               }
             />
-          </Grid>
+          </Box>
 
-          <Grid item xs={6} sm={4} md={3}>
+          <Box >
             Background Color:
-          </Grid>
-          <Grid item xs={6} sm={8} md={9}>
+          </Box>
+          <Box >
             <StyledInputElement
               type="color"
               value={background}
@@ -77,8 +76,8 @@ const AppDrawer: React.FC<AppDrawerProps> = (props) => {
                 setColor("background", target.value)
               }
             />
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
       </Wrapper>
       <Wrapper>
         <ButtonGroup>
