@@ -10,5 +10,6 @@ services:
       - "3000:3000"
     volumes:
       - ./services/website:/app
+      - ./services/website/dist:/app/dist
     stdin_open: true
     tty: true
