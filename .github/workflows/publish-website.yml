@@ -27,10 +27,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18'
+          node-version: '22-alpine'
 
       - name: Install Dependencies 📦
-        run: yarn install
+        run: yarn --cwd services/website install
 
       - name: Build 🚧
         run: yarn --cwd services/website build
