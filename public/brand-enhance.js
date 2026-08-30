@@ -1,16 +1,9 @@
-// Progressive enhancement for /editor: turns the static logo preview into an
-// interactive recolour + download tool, wires the "Edit these colours" buttons
-// on the colourway cards, and adds a PNG download for each colourway. Without
-// this script the page still shows the preview and the SVG colourway downloads.
+// Progressive enhancement for the /brand pages: turns the static logo preview
+// on the "Logo editor" tab into an interactive recolour + download tool, and
+// adds a PNG download for each colourway card. Without this script the
+// Colourways tab still offers the SVG downloads.
 (function () {
     "use strict";
-
-    var HEX = /^#[0-9a-fA-F]{6}$/;
-
-    function fillOf(svg, sel) {
-        var el = svg && svg.querySelector(sel);
-        return el ? el.getAttribute("fill") || "" : "";
-    }
 
     function serialize(svgEl) {
         var clone = svgEl.cloneNode(true);
@@ -103,13 +96,6 @@
         }
 
         var inputs = root.querySelectorAll('input[type="color"][data-part]');
-        function setInput(part, value) {
-            for (var i = 0; i < inputs.length; i++) {
-                if (inputs[i].getAttribute("data-part") !== part) continue;
-                if (HEX.test(value)) inputs[i].value = value;
-            }
-            apply(part, value);
-        }
         for (var i = 0; i < inputs.length; i++) {
             (function (input) {
                 var part = input.getAttribute("data-part");
@@ -120,25 +106,28 @@
             })(inputs[i]);
         }
 
-        // "Edit these colours" on each colourway card -> load it into the editor.
-        var loaders = document.querySelectorAll("[data-load-preset]");
-        for (var j = 0; j < loaders.length; j++) {
-            (function (btn) {
-                btn.hidden = false;
-                btn.addEventListener("click", function () {
-                    var card = btn.closest("li");
-                    var psvg = card && card.querySelector("svg");
-                    if (!psvg) return;
-                    setInput("background", fillOf(psvg, SEL.background));
-                    setInput("left", fillOf(psvg, SEL.left));
-                    setInput("right", fillOf(psvg, SEL.right));
-                    setInput("border", fillOf(psvg, "#D > path:nth-of-type(2)"));
-                    if (root.scrollIntoView) {
-                        root.scrollIntoView({ behavior: "smooth", block: "start" });
-                    }
-                });
-            })(loaders[j]);
-        }
+        // A colourway card can deep-link here with its palette in the query:
+        // /brand?background=RRGGBB&left=RRGGBB&right=RRGGBB&border=RRGGBB
+        var HEX = /^#?[0-9a-fA-F]{6}$/;
+        var params = new URLSearchParams(location.search);
+        Object.keys(SEL).forEach(function (part) {
+            var raw = params.get(part);
+            if (!raw) return;
+            var value =
+                raw === "transparent"
+                    ? "transparent"
+                    : HEX.test(raw)
+                      ? "#" + raw.replace(/^#/, "")
+                      : null;
+            if (!value) return;
+            apply(part, value);
+            if (value === "transparent") return;
+            for (var q = 0; q < inputs.length; q++) {
+                if (inputs[q].getAttribute("data-part") === part) {
+                    inputs[q].value = value;
+                }
+            }
+        });
 
         var svgBtn = root.querySelector('[data-download="svg"]');
         if (svgBtn) {

@@ -1,9 +1,10 @@
 .hero {
-  max-width: 320px;
-  margin: 0 auto var(--space-4);
+  width: 100%;
+  margin: 0 0 var(--space-4);
 }
 
 .hero svg {
+  display: block;
   width: 100%;
   height: auto;
   border-radius: var(--radius);
@@ -12,12 +13,4 @@
 article h2 {
   font-size: 1.1rem;
   margin-top: var(--space-5);
-}
-
-.crew {
-  margin: 0;
-  padding-left: 1.2rem;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
 }

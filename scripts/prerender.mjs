@@ -1,9 +1,11 @@
 // Turn the client build into fully static HTML:
-//  - render every route with the SSR bundle,
+//  - render every route (both language trees: / = de, /en = en) with the SSR bundle,
 //  - drop the <script>/<noscript> tags from the template,
-//  - re-add only the tiny /editor-enhance.js on the /editor page,
+//  - re-add /lang.js in <head> everywhere, /logo-randomize.js on every page,
+//    and /brand-enhance.js on the /brand pages,
+//  - set <html lang> + <title> + hreflang alternates per page,
 //  - write dist/<route>/index.html + dist/404.html,
-//  - emit the /editor colourway SVGs,
+//  - emit the /brand colourway SVGs,
 //  - delete the now-unreferenced client JS chunks.
 import {
     readFileSync,
@@ -33,24 +35,76 @@ if (!stripped.includes('<div id="root"></div>')) {
     throw new Error("prerender: '<div id=\"root\"></div>' not found in dist/index.html");
 }
 
+const SITE = "https://dachboden-sessions.de";
+
 const TITLES = {
-    "/": "Dachboden Sessions (Est. 2016)",
-    "/mixes": "Mixes · Dachboden Sessions",
-    "/gallery": "Gallery · Dachboden Sessions",
-    "/editor": "Logo editor · Dachboden Sessions",
-    "/impressum": "Impressum · Dachboden Sessions",
+    de: {
+        "/": "Dachboden Sessions (seit 2016)",
+        "/mixes": "Mixes · Dachboden Sessions",
+        "/gallery": "Galerie · Dachboden Sessions",
+        "/brand": "Marke · Dachboden Sessions",
+        "/brand/colourways": "Farbvarianten · Dachboden Sessions",
+        "/impressum": "Impressum · Dachboden Sessions",
+    },
+    en: {
+        "/": "Dachboden Sessions (Est. 2016)",
+        "/mixes": "Mixes · Dachboden Sessions",
+        "/gallery": "Gallery · Dachboden Sessions",
+        "/brand": "Brand · Dachboden Sessions",
+        "/brand/colourways": "Colourways · Dachboden Sessions",
+        "/impressum": "Impressum · Dachboden Sessions",
+    },
 };
 
-// Only /editor gets a script — the progressive-enhancement helper.
-const EDITOR_SCRIPT = '<script type="module" src="/editor-enhance.js"></script>';
+const DESCRIPTIONS = {
+    de: "Mittelfrankens Dachboden Sessions – ein historisches Archiv, seit 2016",
+    en: "Mittelfranken's Dachboden Sessions — a historical record, est. 2016",
+};
+
+// /lang.js does client-side language routing; it must run before paint.
+const LANG_SCRIPT = '<script src="/lang.js"></script>';
+// Every page re-rolls the header logo colours on load; only the /brand pages
+// also get the recolour/download progressive-enhancement helper.
+const LOGO_SCRIPT = '<script src="/logo-randomize.js"></script>';
+const BRAND_SCRIPT = '<script type="module" src="/brand-enhance.js"></script>';
+
+function localeOf(path) {
+    return path === "/en" || path.startsWith("/en/") ? "en" : "de";
+}
+
+/** The route without the /en prefix (e.g. /en/mixes -> /mixes, /en -> /). */
+function basePathOf(path, locale) {
+    if (locale !== "en") return path;
+    return path === "/en" ? "/" : path.slice(3);
+}
 
 function pageFor(path, bodyHtml) {
-    const title = TITLES[path] ?? "Dachboden Sessions";
+    const locale = localeOf(path);
+    const base = basePathOf(path, locale);
+    const title = TITLES[locale][base] ?? "Dachboden Sessions";
+    const deUrl = SITE + (base === "/" ? "/" : base);
+    const enUrl = SITE + "/en" + (base === "/" ? "" : base);
+    const alternates =
+        `<link rel="alternate" hreflang="de" href="${deUrl}" />\n` +
+        `    <link rel="alternate" hreflang="en" href="${enUrl}" />\n` +
+        `    <link rel="alternate" hreflang="x-default" href="${deUrl}" />`;
+
     let html = stripped
+        .replace('<html lang="en">', `<html lang="${locale}">`)
         .replace(/<title>[\s\S]*?<\/title>/i, `<title>${title}</title>`)
+        .replace(
+            /(<meta name="description" content=")[^"]*(")/i,
+            `$1${DESCRIPTIONS[locale]}$2`
+        )
+        .replace(
+            "</head>",
+            `    ${LANG_SCRIPT}\n    ${alternates}\n  </head>`
+        )
         .replace('<div id="root"></div>', `<div id="root">${bodyHtml}</div>`);
-    if (path === "/editor") {
-        html = html.replace("</body>", `    ${EDITOR_SCRIPT}\n  </body>`);
+
+    html = html.replace("</body>", `    ${LOGO_SCRIPT}\n  </body>`);
+    if (base === "/brand" || base === "/brand/colourways") {
+        html = html.replace("</body>", `    ${BRAND_SCRIPT}\n  </body>`);
     }
     return html;
 }
@@ -71,16 +125,17 @@ for (const path of allPaths) {
 writeFileSync(join(dist, "404.html"), pageFor(notFoundPath, render(notFoundPath)));
 console.log("prerender: 404.html");
 
-// Downloadable logo colourways, alongside dist/editor/index.html
-const editorDir = join(dist, "editor");
-mkdirSync(editorDir, { recursive: true });
+// Downloadable logo colourways, alongside dist/brand/index.html
+const brandDir = join(dist, "brand");
+mkdirSync(brandDir, { recursive: true });
 for (const { name, svg } of renderPresetSvgs()) {
-    writeFileSync(join(editorDir, `db-${name}.svg`), svg);
-    console.log(`prerender: editor/db-${name}.svg`);
+    writeFileSync(join(brandDir, `db-${name}.svg`), svg);
+    console.log(`prerender: brand/db-${name}.svg`);
 }
 
 // Drop the client SPA bundle — nothing references it any more.
-// (public/editor-enhance.js lives in dist/ root, not dist/assets/, so it stays.)
+// (public/brand-enhance.js and public/logo-randomize.js live in dist/ root, not
+// dist/assets/, so they stay.)
 const assetsDir = join(dist, "assets");
 for (const file of readdirSync(assetsDir)) {
     if (file.endsWith(".js") || file.endsWith(".js.map")) {

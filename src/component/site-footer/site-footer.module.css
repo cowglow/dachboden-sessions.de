@@ -21,12 +21,34 @@
   font-weight: 600;
 }
 
+.copy {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+/* The h-card p-name links home, but should read as plain text in the footer. */
+.copy :global(.p-name) {
+  color: inherit;
+  font-weight: 600;
+}
+
+.copy :global(.p-name):hover {
+  text-decoration: underline;
+}
+
+/* Impressum anchored left, language toggle anchored right. */
 .meta {
   margin: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-1) var(--space-3);
+  justify-content: space-between;
   align-items: center;
+  gap: var(--space-1) var(--space-3);
   color: var(--color-text-muted);
   font-size: 0.85rem;
+}
+
+.impressum {
+  margin-right: auto;
 }

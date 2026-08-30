@@ -8,22 +8,34 @@
   border-radius: 4px;
 }
 
+/* Photo wall: 3-column grid of fixed-height tiles (images cover-cropped).
+   First photo is a full-width banner, last photo a full-width 2-row feature;
+   everything between fills the middle rows three-across. */
 .grid {
   list-style: none;
   margin: var(--space-4) 0 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 150px;
   gap: var(--space-2);
 }
 
 .cell {
-  aspect-ratio: 1 / 1;
+  min-width: 0;
+}
+
+.cell:first-child {
+  grid-column: 1 / -1;
+}
+
+.cell:last-child {
+  grid-column: 1 / -1;
+  grid-row: span 2;
 }
 
 .cellLink {
   display: block;
-  width: 100%;
   height: 100%;
   border-radius: var(--radius);
   overflow: hidden;
@@ -34,11 +46,20 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* Crop from the bottom, not the middle — keeps faces/heads in frame. */
+  object-position: top;
+  display: block;
   transition: transform 0.2s ease;
 }
 
 .cellLink:hover .thumb {
   transform: scale(1.03);
+}
+
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .detail {

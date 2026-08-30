@@ -1,0 +1,26 @@
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: 0.85rem;
+}
+
+.toggle a {
+  color: var(--color-text-muted);
+}
+
+.toggle a:hover {
+  color: var(--color-text);
+}
+
+.active,
+.active:hover {
+  color: var(--color-text);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: default;
+}
+
+.sep {
+  color: var(--color-border);
+}

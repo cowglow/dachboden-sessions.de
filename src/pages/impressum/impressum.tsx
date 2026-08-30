@@ -1,7 +1,8 @@
 import styles from "./impressum.module.css";
 
+// German legal text — kept German in both language trees.
 const ImpressumPage = () => (
-    <section className={styles.legal}>
+    <section className={styles.legal} lang="de">
         <h1>Impressum</h1>
 
         <h2>Angaben gemäß § 5 DDG</h2>
