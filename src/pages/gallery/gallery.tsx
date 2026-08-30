@@ -6,7 +6,7 @@ import { formatDate } from "src/service/mixcloud";
 import styles from "./gallery.module.css";
 
 const GalleryPage = () => {
-    const { t } = useI18n();
+    const { t, locale } = useI18n();
     const g = t.gallery;
 
     return (
@@ -65,7 +65,7 @@ const GalleryPage = () => {
                         <span className={styles.igMeta}>
                             {post.media === "video" ? g.video : g.photo} ·{" "}
                             <time className="dt-published" dateTime={post.date}>
-                                {formatDate(post.date)}
+                                {formatDate(post.date, locale)}
                             </time>
                         </span>
                     </li>

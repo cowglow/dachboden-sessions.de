@@ -31,7 +31,7 @@ function groupByYear(mixes: Mix[]): [string, Mix[]][] {
 const numberFmt = new Intl.NumberFormat();
 
 const MixesPage = () => {
-    const { t } = useI18n();
+    const { t, locale } = useI18n();
     const m = t.mixes;
     const { profile, mixes } = snapshot;
     const years = groupByYear(mixes);
@@ -59,7 +59,7 @@ const MixesPage = () => {
                     <ul className={styles.list}>
                         {yearMixes.map((mix) => {
                             const duration = formatDuration(mix.audioLength);
-                            const date = formatDate(mix.createdTime);
+                            const date = formatDate(mix.createdTime, locale);
                             const plays =
                                 mix.playCount != null
                                     ? m.plays.replace(

@@ -10,11 +10,18 @@ export function formatDuration(seconds?: number | null): string {
     return `${m}:${String(s).padStart(2, "0")}`;
 }
 
-export function formatDate(iso?: string): string {
+// Pin the BCP-47 tag so prerender (Node, whatever its system locale) and the
+// browser agree: German pages get "26. Nov. 2016", English "26 Nov 2016".
+const DATE_LOCALE: Record<"de" | "en", string> = {
+    de: "de-DE",
+    en: "en-GB",
+};
+
+export function formatDate(iso?: string, locale: "de" | "en" = "de"): string {
     if (!iso) return "";
     const date = new Date(iso);
     if (Number.isNaN(date.getTime())) return "";
-    return date.toLocaleDateString(undefined, {
+    return date.toLocaleDateString(DATE_LOCALE[locale], {
         year: "numeric",
         month: "short",
         day: "numeric",

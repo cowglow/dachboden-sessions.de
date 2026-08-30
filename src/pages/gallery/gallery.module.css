@@ -60,6 +60,14 @@
   .grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  /* Two columns: the first tile and the last (2-row) feature already span the
+     full width. The middle tiles pair up two-across; when there's an odd number
+     of them the second-to-last would sit alone next to an empty cell, so
+     stretch it into a full-width banner too. */
+  .cell:nth-last-child(2):nth-child(even) {
+    grid-column: 1 / -1;
+  }
 }
 
 .detail {
