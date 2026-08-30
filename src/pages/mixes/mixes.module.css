@@ -1,0 +1,72 @@
+.lead {
+  color: var(--color-text-muted);
+}
+
+.yearBlock {
+  margin-top: var(--space-5);
+}
+
+.year {
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.cardLink {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-2);
+  color: var(--color-text);
+}
+
+.cardLink:hover {
+  text-decoration: none;
+  background: var(--color-surface-2);
+}
+
+.art {
+  width: 88px;
+  height: 88px;
+  flex: 0 0 auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  object-fit: cover;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+  padding: var(--space-1) var(--space-1) var(--space-1) 0;
+}
+
+.title {
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.sub,
+.tags {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+}

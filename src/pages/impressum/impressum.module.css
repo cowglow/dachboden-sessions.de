@@ -1,0 +1,9 @@
+.legal h2 {
+  font-size: 1.05rem;
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-2);
+}
+
+.legal p {
+  color: var(--color-text-muted);
+}
