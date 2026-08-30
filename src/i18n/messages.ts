@@ -4,7 +4,11 @@ export type Locale = "de" | "en";
 // object is the shape of record; `de` must match it (TS enforces via `Dict`).
 const en = {
     nav: { mixes: "Mixes", gallery: "Gallery", brand: "Brand" },
-    footer: { listen: "Listen on Mixcloud →", impressum: "Impressum" },
+    footer: {
+        listen: "Listen on Mixcloud →",
+        impressum: "Impressum",
+        source: "Source",
+    },
     langToggle: { label: "Language" },
     about: {
         title: "Dachboden Sessions (Est. 2016)",
@@ -88,7 +92,11 @@ export type Dict = {
 
 const de: Dict = {
     nav: { mixes: "Mixes", gallery: "Galerie", brand: "Marke" },
-    footer: { listen: "Auf Mixcloud hören →", impressum: "Impressum" },
+    footer: {
+        listen: "Auf Mixcloud hören →",
+        impressum: "Impressum",
+        source: "Quellcode",
+    },
     langToggle: { label: "Sprache" },
     about: {
         title: "Dachboden Sessions (seit 2016)",

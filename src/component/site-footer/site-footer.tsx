@@ -28,9 +28,17 @@ const SiteFooter = () => {
                     · Est. 2016
                 </p>
                 <div className={styles.meta}>
-                    <Link className={styles.impressum} to="/impressum">
-                        {t.footer.impressum}
-                    </Link>
+                    <span className={styles.links}>
+                        <Link to="/impressum">{t.footer.impressum}</Link>
+                        <span aria-hidden="true"> · </span>
+                        <a
+                            href="https://github.com/cowglow/dachboden-sessions.de"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            {t.footer.source}
+                        </a>
+                    </span>
                     <LangToggle />
                 </div>
             </div>
