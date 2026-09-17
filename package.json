@@ -10,12 +10,12 @@
     "fetch:mixes": "node scripts/fetch-mixes.mjs"
   },
   "dependencies": {
-    "react": "^19.2.8",
+    "react": "^19.3.0",
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.18.3"
   },
   "devDependencies": {
-    "@types/react": "^19.2.18",
+    "@types/react": "^19.3.0",
     "@types/react-dom": "^19.2.5",
     "@vitejs/plugin-react": "^6.1.1",
     "typescript": "^5.9.3",
